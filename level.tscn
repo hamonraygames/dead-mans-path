@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://drvhybx3tktgf"]
+[gd_scene load_steps=7 format=3 uid="uid://drvhybx3tktgf"]
 
+[ext_resource type="Script" path="res://Main.gd" id="1_0rmwc"]
 [ext_resource type="Script" path="res://Player.gd" id="1_a66v4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0urpc"]
@@ -7,19 +8,33 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ym4ih"]
 albedo_color = Color(0.905882, 0, 0.223529, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_u8rrw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opcgt"]
+albedo_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
 [node name="Level" type="Node3D"]
+script = ExtResource("1_0rmwc")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.513182, 0)
 script = ExtResource("1_a66v4")
 metadata/_edit_group_ = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+[node name="Body" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_0urpc")
 surface_material_override/0 = SubResource("StandardMaterial3D_ym4ih")
 
+[node name="Glasses" type="MeshInstance3D" parent="Player/Body"]
+transform = Transform3D(0.5, 0, 0, 0, 0.3, 0, 0, 0, 0.8, 0.265184, 0.41879, 0)
+mesh = SubResource("BoxMesh_u8rrw")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_opcgt")
+
 [node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+use_collision = true
 size = Vector3(22, 1, 22)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
