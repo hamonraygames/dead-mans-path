@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://drvhybx3tktgf"]
+[gd_scene load_steps=9 format=3 uid="uid://drvhybx3tktgf"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_0rmwc"]
 [ext_resource type="Script" path="res://Player.gd" id="1_a66v4"]
+[ext_resource type="Script" path="res://GunController.gd" id="3_appcf"]
+[ext_resource type="PackedScene" uid="uid://cmar8jb5o20n3" path="res://gun.tscn" id="4_i007d"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0urpc"]
 
@@ -31,6 +33,13 @@ transform = Transform3D(0.5, 0, 0, 0, 0.3, 0, 0, 0, 0.8, 0.265184, 0.41879, 0)
 mesh = SubResource("BoxMesh_u8rrw")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_opcgt")
+
+[node name="Hand" type="Node3D" parent="Player/Body"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.353019, 0, 0.699761)
+
+[node name="GunController" type="Node" parent="Player"]
+script = ExtResource("3_appcf")
+StartingWeapon = ExtResource("4_i007d")
 
 [node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
