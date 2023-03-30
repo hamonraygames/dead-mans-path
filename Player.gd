@@ -1,9 +1,13 @@
 extends CharacterBody3D
 
-
+@onready var gun_controller = $GunController
 var SPEED = 5
 
 func _physics_process(delta):
+	move()
+	Shoot()
+		
+func move():
 	var direction = Vector3()
 	
 	if Input.is_action_pressed("ui_right"):
@@ -16,5 +20,9 @@ func _physics_process(delta):
 		direction.z += 1 
 
 	velocity = direction.normalized() * SPEED	
-		
 	move_and_slide()
+
+func Shoot():
+	if Input.is_action_pressed("primary_action"):
+		gun_controller.gun_shoot()
+

@@ -19,3 +19,6 @@ func equip_weapon(weapon_to_equip):
 		print("weapon equipped")
 		hand.add_child(equiped_weapon)
 		
+func gun_shoot():
+	if equiped_weapon:
+		equiped_weapon.shoot_bullet()
