@@ -5,7 +5,7 @@ var SPEED = 5
 
 func _physics_process(delta):
 	move()
-	Shoot()
+	shoot()
 		
 func move():
 	var direction = Vector3()
@@ -22,7 +22,7 @@ func move():
 	velocity = direction.normalized() * SPEED	
 	move_and_slide()
 
-func Shoot():
+func shoot():
 	if Input.is_action_pressed("primary_action"):
 		gun_controller.gun_shoot()
 
