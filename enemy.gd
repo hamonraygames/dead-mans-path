@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready 
-var nav: NavigationRegion3D = $"../Navigation"
+var nav: NavigationRegion3D = $"../NavigationRegion3D"
 
 @onready
 var nav_agent: NavigationAgent3D = $NavigationAgent3D

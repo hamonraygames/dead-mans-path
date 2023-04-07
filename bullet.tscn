@@ -2,25 +2,25 @@
 
 [ext_resource type="Script" path="res://bullet.gd" id="1_o3qko"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_kmmq7"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qnjvi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_reaan"]
 albedo_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_xwj7y"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5oin5"]
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_o3qko")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-09, -0.097206, 0, 0.1, -4.24901e-09, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource("SphereMesh_kmmq7")
+transform = Transform3D(-4.37114e-09, -0.1, 0, 0.1, -4.37114e-09, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_qnjvi")
 surface_material_override/0 = SubResource("StandardMaterial3D_reaan")
 
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-shape = SubResource("SphereShape3D_xwj7y")
+transform = Transform3D(-4.37114e-09, -0.1, 0, 0.1, -4.37114e-09, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_5oin5")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
