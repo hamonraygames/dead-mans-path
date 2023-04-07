@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://Scripts/gun.gd" id="1_dcqkg"]
+[ext_resource type="PackedScene" uid="uid://b6oqj2e6pjul2" path="res://Scenes/bullet.tscn" id="2_7wyn3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37mnv"]
+albedo_color = Color(0.396078, 0.396078, 0.396078, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hwdi1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlaam"]
+albedo_color = Color(0.407843, 0.196078, 0.176471, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_803dt"]
+albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
+
+[node name="Gun" type="Node3D"]
+script = ExtResource("1_dcqkg")
+Bullet = ExtResource("2_7wyn3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.724931, 0, 6.07429e-08, 0, 0.176036, 0, -2.53502e-07, 0, 0.173705, 0, 0, 1.5117e-08)
+material_override = SubResource("StandardMaterial3D_37mnv")
+mesh = SubResource("BoxMesh_hwdi1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.288567, 0.108099, 3.20592e-08, -0.226624, 0.137646, -1.10839e-08, -1.14609e-07, -1.89007e-08, 0.102637, 0.395891, -0.131054, -5.41028e-08)
+mesh = SubResource("BoxMesh_hwdi1")
+surface_material_override/0 = SubResource("StandardMaterial3D_vlaam")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0739229, 0.170359, 7.64422e-09, -0.357148, -0.0352611, -9.38845e-09, -5.08443e-08, -2.97866e-08, 0.0548338, -0.136514, -0.161087, 3.89859e-08)
+mesh = SubResource("BoxMesh_hwdi1")
+surface_material_override/0 = SubResource("StandardMaterial3D_803dt")
+
+[node name="Muzzle" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.279166, 0, 0)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
