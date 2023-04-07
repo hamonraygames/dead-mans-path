@@ -4,6 +4,7 @@ extends Node3D
 @export var muzzle_speed = 30
 @export var millis_between_shots = 100
 @onready var rof_timer = $Timer
+
 var equiped_weapon: Node3D
 var can_shoot = true
 var hand
@@ -12,7 +13,6 @@ func _ready():
 	rof_timer.wait_time = millis_between_shots / 1000.0
 
 func _process(delta):
-#	shoot_bullet()
 	pass
 
 func shoot_bullet():
@@ -22,7 +22,6 @@ func shoot_bullet():
 		new_bullet.speed = muzzle_speed
 		var scene_root = get_tree().get_root().get_children()[0]
 		scene_root.add_child(new_bullet)
-		print("pew")
 		can_shoot = false
 		rof_timer.start()
 

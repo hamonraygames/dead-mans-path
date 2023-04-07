@@ -11,3 +11,8 @@ func _physics_process(delta):
 	timer += delta
 	if KILL_TIME <= timer:
 		queue_free()
+
+
+func _on_area_3d_body_entered(body):
+	print("hit") # Replace with function body.
+	queue_free()
