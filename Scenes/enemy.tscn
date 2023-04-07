@@ -1,12 +1,22 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://nrdrnenw3umb"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_ei75b"]
-[ext_resource type="PackedScene" uid="uid://ditlbhacv35tj" path="res://Scenes/stats.tscn" id="2_hik5e"]
+[ext_resource type="PackedScene" path="res://Scenes/stats.tscn" id="2_hik5e"]
+[ext_resource type="Texture2D" uid="uid://b3v2xyvtpiklm" path="res://Textures/Snow_002_COLOR.jpg" id="2_mw4jh"]
+[ext_resource type="Texture2D" uid="uid://cmiw8i80t01qq" path="res://Textures/Snow_002_OCC.jpg" id="3_4qkng"]
+[ext_resource type="Texture2D" uid="uid://cwkjmetfnrrcq" path="res://Textures/Snow_002_NORM.jpg" id="4_nlolw"]
+[ext_resource type="Texture2D" uid="uid://cg46eptdc5kvr" path="res://Textures/Snow_002_ROUGH.jpg" id="5_u31sh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pcdix"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4md1r"]
 albedo_color = Color(0.2, 0.721569, 1, 1)
+albedo_texture = ExtResource("2_mw4jh")
+roughness_texture = ExtResource("5_u31sh")
+normal_enabled = true
+normal_texture = ExtResource("4_nlolw")
+ao_enabled = true
+ao_texture = ExtResource("3_4qkng")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gy03o"]
 
