@@ -5,7 +5,7 @@ class_name Stats
 @export var max_hp = 10
 var current_hp = max_hp
 
-signal  you_died_signal
+signal you_died_signal
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
