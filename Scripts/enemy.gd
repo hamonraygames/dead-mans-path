@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+class_name Enemy
+
 @onready 
 var nav: NavigationRegion3D = $"../NavigationRegion3D"
 

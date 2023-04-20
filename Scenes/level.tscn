@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://5ib1eb55kypd"]
+[gd_scene load_steps=12 format=3 uid="uid://b108qv670ugt4"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_0rmwc"]
 [ext_resource type="PackedScene" path="res://Scenes/player.tscn" id="2_0nq60"]
 [ext_resource type="Texture2D" uid="uid://wlu7k2ewmbgr" path="res://Textures/aerial_rocks_02_diff_4k.jpg" id="4_fqxyg"]
 [ext_resource type="Texture2D" uid="uid://0sflpbqnfuk0" path="res://Textures/limestonemarked2-albedo.png" id="5_3qdts"]
 [ext_resource type="PackedScene" uid="uid://nrdrnenw3umb" path="res://Scenes/enemy.tscn" id="5_jmwa5"]
+[ext_resource type="Script" path="res://Scripts/Spawner.gd" id="6_6fxdk"]
 [ext_resource type="Texture2D" uid="uid://dora7sgt10gn4" path="res://Textures/limestonemarked2-normal-ogl.png" id="6_yuo7m"]
+[ext_resource type="Script" path="res://Scripts/Wave.gd" id="8_34m2r"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_cbu5j"]
 vertices = PackedVector3Array(-1.75, 0, -7, -0.75, 0, -7, -0.75, 0, -9.5, -2.75, 0, -6.25, -1.75, 0, -7, -0.75, 0, -9.5, -9.5, 0, -9.5, -9.5, 0, -4.25, -9.5, 0, -4.25, -3, 0, -4.25, -2.75, 0, -6.25, 7, 0, -0.75, 8, 0, 0.25, 9.5, 0, 0, -0.75, 0, -9.5, -0.75, 0, -7, 1, 0, -6.25, 1, 0, -4, 5, 0, -0.5, 7, 0, -0.75, 1, 0, -6.25, 1, 0, -6.25, 7, 0, -0.75, 9.5, 0, 0, 9.5, 0, -9.5, -0.75, 0, -9.5, -9.5, 0, 3, -6.75, 0, 3, -6.5, 0, 1.75, -1.5, 0, 1, -1.25, 0, -2.75, -2.25, 0, -3, -5.5, 0, 1, -9.5, 0, 3, -6.5, 0, 1.75, -5.5, 0, 1, -2.25, 0, -3, -3, 0, -4.25, -9.5, 0, -4.25, 0.75, 0, 3, 4, 0, 3, 4, 0, 0.5, 0, 0, 1.25, 0.25, 0, -3, 0, 0, 1.25, 4, 0, 0.5, 5, 0, -0.5, 1, 0, -4, -1.25, 0, -2.75, -1.5, 0, 1, 0, 0, 1.25, 0.25, 0, -3, 4, 0, 3, 0.75, 0, 3, 0.75, 0, 4, 4, 0, 3, 0.75, 0, 4, 0, 0, 5, 0, 0, 9.5, 4.25, 0, 8, 8.25, 0, 7.5, 7.5, 0, 8.5, 9.5, 0, 9.5, 8.25, 0, 7.5, 9.5, 0, 9.5, 9.5, 0, 0, 8, 0, 0.25, 5.25, 0, 8.75, 4.25, 0, 8, 0, 0, 9.5, 5.25, 0, 8.75, 0, 0, 9.5, 9.5, 0, 9.5, 7.5, 0, 8.5, -6.5, 0, 4.5, -6.75, 0, 3, -9.5, 0, 3, -5.5, 0, 5.25, -6.5, 0, 4.5, -9.5, 0, 3, -9.5, 0, 9.5, 0, 0, 9.5, 0, 0, 5, -5.5, 0, 5.25, -9.5, 0, 9.5)
@@ -34,13 +36,7 @@ transform = Transform3D(-0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, -2.58096e-08, 1.49012e-08, 0, 0.5, 0.866025, -2.98023e-08, -0.866025, 0.5, 1, 10, 8)
-
-[node name="Enemy2" parent="." instance=ExtResource("5_jmwa5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.149039, 9)
-
-[node name="Enemy" parent="." instance=ExtResource("5_jmwa5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.10264, -7)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 10)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_cbu5j")
@@ -68,3 +64,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
 use_collision = true
 size = Vector3(1, 2, 1)
 material = SubResource("StandardMaterial3D_t5t7e")
+
+[node name="Spawner" type="Node3D" parent="."]
+script = ExtResource("6_6fxdk")
+Enemy = ExtResource("5_jmwa5")
+
+[node name="Timer" type="Timer" parent="Spawner"]
+
+[node name="Waves" type="Node" parent="Spawner"]
+
+[node name="Wave" type="Node" parent="Spawner/Waves"]
+script = ExtResource("8_34m2r")
+
+[node name="Wave2" type="Node" parent="Spawner/Waves"]
+script = ExtResource("8_34m2r")
+num_enemies = 5
+seconds_between_spawns = 1.0
+
+[node name="Wave3" type="Node" parent="Spawner/Waves"]
+script = ExtResource("8_34m2r")
+num_enemies = 55
+seconds_between_spawns = 0.25
+
+[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
