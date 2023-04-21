@@ -21,10 +21,13 @@ ao_texture = ExtResource("3_4qkng")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gy03o"]
 
 [node name="Enemy" type="CharacterBody3D"]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_ei75b")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+layers = 5
 mesh = SubResource("CapsuleMesh_pcdix")
 surface_material_override/0 = SubResource("StandardMaterial3D_4md1r")
 
