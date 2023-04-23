@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://0suckvd3sk88"]
+
+[ext_resource type="Texture2D" uid="uid://b3v2xyvtpiklm" path="res://Textures/Snow_002_COLOR.jpg" id="1_h2yrs"]
+[ext_resource type="Texture2D" uid="uid://cmiw8i80t01qq" path="res://Textures/Snow_002_OCC.jpg" id="2_2iepb"]
+[ext_resource type="Texture2D" uid="uid://cwkjmetfnrrcq" path="res://Textures/Snow_002_NORM.jpg" id="3_uwa63"]
+[ext_resource type="Texture2D" uid="uid://cg46eptdc5kvr" path="res://Textures/Snow_002_ROUGH.jpg" id="4_8sitx"]
+
+[resource]
+albedo_color = Color(0.2, 0.721569, 1, 1)
+albedo_texture = ExtResource("1_h2yrs")
+roughness_texture = ExtResource("4_8sitx")
+normal_enabled = true
+normal_texture = ExtResource("3_uwa63")
+ao_enabled = true
+ao_texture = ExtResource("2_2iepb")

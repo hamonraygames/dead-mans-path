@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b108qv670ugt4"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_0rmwc"]
-[ext_resource type="PackedScene" path="res://Scenes/player.tscn" id="2_0nq60"]
+[ext_resource type="PackedScene" uid="uid://g4jqjbfp0gby" path="res://Scenes/player.tscn" id="2_0nq60"]
 [ext_resource type="Texture2D" uid="uid://wlu7k2ewmbgr" path="res://Textures/aerial_rocks_02_diff_4k.jpg" id="4_fqxyg"]
 [ext_resource type="Texture2D" uid="uid://0sflpbqnfuk0" path="res://Textures/limestonemarked2-albedo.png" id="5_3qdts"]
 [ext_resource type="PackedScene" uid="uid://nrdrnenw3umb" path="res://Scenes/enemy.tscn" id="5_jmwa5"]
@@ -40,28 +40,37 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 10)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_cbu5j")
+navigation_layers = 3
 
 [node name="Ground" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_s18fm")
 use_collision = true
+collision_layer = 3
+collision_mask = 3
 size = Vector3(22, 1, 22)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(4.1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
 use_collision = true
+collision_layer = 3
+collision_mask = 3
 size = Vector3(1, 2, 1)
 material = SubResource("StandardMaterial3D_t5t7e")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 6.3, 6, 0, 4)
 use_collision = true
+collision_layer = 3
+collision_mask = 3
 size = Vector3(1, 2, 1)
 material = SubResource("StandardMaterial3D_t5t7e")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
 use_collision = true
+collision_layer = 3
+collision_mask = 3
 size = Vector3(1, 2, 1)
 material = SubResource("StandardMaterial3D_t5t7e")
 
@@ -75,15 +84,11 @@ Enemy = ExtResource("5_jmwa5")
 
 [node name="Wave" type="Node" parent="Spawner/Waves"]
 script = ExtResource("8_34m2r")
+seconds_between_spawns = 1.0
 
 [node name="Wave2" type="Node" parent="Spawner/Waves"]
 script = ExtResource("8_34m2r")
-num_enemies = 5
+num_enemies = 20
 seconds_between_spawns = 1.0
-
-[node name="Wave3" type="Node" parent="Spawner/Waves"]
-script = ExtResource("8_34m2r")
-num_enemies = 55
-seconds_between_spawns = 0.25
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
