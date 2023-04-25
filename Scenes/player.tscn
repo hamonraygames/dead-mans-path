@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://g4jqjbfp0gby"]
+[gd_scene load_steps=10 format=3 uid="uid://bx5k706bx204p"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_gnrtx"]
+[ext_resource type="PackedScene" path="res://Scenes/stats.tscn" id="2_v6fwm"]
 [ext_resource type="Script" path="res://Scripts/GunController.gd" id="2_x06ol"]
 [ext_resource type="PackedScene" path="res://Scenes/gun.tscn" id="3_er8w1"]
 
@@ -24,6 +25,9 @@ collision_priority = 20.0
 script = ExtResource("1_gnrtx")
 metadata/_edit_group_ = true
 
+[node name="Stats" parent="." instance=ExtResource("2_v6fwm")]
+max_hp = 3
+
 [node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_0urpc")
@@ -44,3 +48,5 @@ StartingWeapon = ExtResource("3_er8w1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_xceya")
+
+[connection signal="you_died_signal" from="Stats" to="." method="_on_stats_you_died_signal"]
