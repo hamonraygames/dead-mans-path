@@ -5,6 +5,7 @@ class_name Stats
 @export 
 var max_hp = 5
 
+@onready
 var current_hp = max_hp
 
 signal you_died_signal
