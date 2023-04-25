@@ -32,26 +32,26 @@ enum  state {
 var current_state = state.SEEKING
 
 func _physics_process(delta):
-	match  current_state:
-		state.SEEKING:
-			$MeshInstance3D.set_surface_override_material(0, default_material)
-			moveing(delta, speed)
-#			if not nav_agent.is_target_reached():
-#				var next_location = nav_agent.get_next_path_position()
-#				var direction = global_position.direction_to(next_location)
-#				global_position += direction * delta * speed 
-		state.ATTACKING:
-			$MeshInstance3D.set_surface_override_material(0, attack_material)
-			attacking(delta)
-#			moveing(delta, speed * attack_speed_multiplier)
-		state.RETURNING:
-			returning(delta, speed)
-			
-		state.RESTING:
-			$MeshInstance3D.set_surface_override_material(0, rest_material)
+	if is_instance_valid(player):
+		match current_state:
+			state.SEEKING:
+				$MeshInstance3D.set_surface_override_material(0, default_material)
+				move(delta, speed)
+				if $AttackRadius.overlaps_body(player):
+					init_attack()
+			state.ATTACKING:
+				$MeshInstance3D.set_surface_override_material(0, attack_material)
+				attacking(delta)
+	#			move(delta, speed * attack_speed_multiplier)
+			state.RETURNING:
+				returning(delta, speed)
+				
+			state.RESTING:
+				$MeshInstance3D.set_surface_override_material(0, rest_material)
+				move(Vector3.ZERO)
 			
 	
-func moveing(delta, final_speed):
+func move(delta, final_speed = 1):
 	if not nav_agent.is_target_reached():
 		var next_location = nav_agent.get_next_path_position()
 		var direction = global_position.direction_to(next_location)
@@ -60,6 +60,8 @@ func moveing(delta, final_speed):
 	else:
 		match current_state:
 			state.ATTACKING:
+				var player_stats: Stats = player.get_node("Stats")
+				player_stats.take_hit(1)
 				current_state = state.RETURNING
 				returning(delta, speed)
 			state.RETURNING:
@@ -80,7 +82,7 @@ func returning(delta, speed):
 
 func attacking(delta):
 	return_position = global_transform.origin
-	moveing(delta, speed * attack_speed_multiplier)
+	move(delta, speed * attack_speed_multiplier)
 		
 func set_target_position(target_position):
 	nav_agent.target_position = target_position
@@ -89,14 +91,12 @@ func set_target_position(target_position):
 func _on_stats_you_died_signal():
 	queue_free()
 
-
-func _on_attack_radios_body_entered(body):
-	if body == player:
-		current_state = state.ATTACKING
-
+func init_attack():
+	current_state = state.ATTACKING
 
 func _on_path_update_timer_timeout():
-	set_target_position(player.global_position)
+	if is_instance_valid(player):
+		set_target_position(player.global_position)
 
 
 func _on_attack_timer_timeout():

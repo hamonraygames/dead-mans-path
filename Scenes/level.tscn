@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b108qv670ugt4"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_0rmwc"]
-[ext_resource type="PackedScene" uid="uid://g4jqjbfp0gby" path="res://Scenes/player.tscn" id="2_0nq60"]
+[ext_resource type="PackedScene" uid="uid://bx5k706bx204p" path="res://Scenes/player.tscn" id="2_0nq60"]
 [ext_resource type="Texture2D" uid="uid://wlu7k2ewmbgr" path="res://Textures/aerial_rocks_02_diff_4k.jpg" id="4_fqxyg"]
 [ext_resource type="Texture2D" uid="uid://0sflpbqnfuk0" path="res://Textures/limestonemarked2-albedo.png" id="5_3qdts"]
 [ext_resource type="PackedScene" uid="uid://nrdrnenw3umb" path="res://Scenes/enemy.tscn" id="5_jmwa5"]
