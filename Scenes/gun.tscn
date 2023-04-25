@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://dpgc5togngr4e"]
 
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="1_dcqkg"]
-[ext_resource type="PackedScene" uid="uid://b6oqj2e6pjul2" path="res://Scenes/bullet.tscn" id="2_7wyn3"]
+[ext_resource type="PackedScene" uid="uid://ci5ompcx3m3yg" path="res://Scenes/bullet.tscn" id="2_7wyn3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37mnv"]
 albedo_color = Color(0.396078, 0.396078, 0.396078, 1)
@@ -15,6 +15,7 @@ albedo_color = Color(0.407843, 0.196078, 0.176471, 1)
 albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
 
 [node name="Gun" type="Node3D"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0)
 script = ExtResource("1_dcqkg")
 Bullet = ExtResource("2_7wyn3")
 
