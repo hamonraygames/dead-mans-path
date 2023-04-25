@@ -86,9 +86,4 @@ Enemy = ExtResource("5_jmwa5")
 script = ExtResource("8_34m2r")
 seconds_between_spawns = 1.0
 
-[node name="Wave2" type="Node" parent="Spawner/Waves"]
-script = ExtResource("8_34m2r")
-num_enemies = 20
-seconds_between_spawns = 1.0
-
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
