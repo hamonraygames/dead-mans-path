@@ -53,7 +53,7 @@ size = Vector3(22, 1, 22)
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(4.1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
 use_collision = true
-collision_layer = 3
+collision_layer = 11
 collision_mask = 3
 size = Vector3(1, 2, 1)
 material = SubResource("StandardMaterial3D_t5t7e")
@@ -61,7 +61,7 @@ material = SubResource("StandardMaterial3D_t5t7e")
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 6.3, 6, 0, 4)
 use_collision = true
-collision_layer = 3
+collision_layer = 11
 collision_mask = 3
 size = Vector3(1, 2, 1)
 material = SubResource("StandardMaterial3D_t5t7e")
@@ -69,7 +69,15 @@ material = SubResource("StandardMaterial3D_t5t7e")
 [node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
 use_collision = true
-collision_layer = 3
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2, 1)
+material = SubResource("StandardMaterial3D_t5t7e")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
+use_collision = true
+collision_layer = 11
 collision_mask = 3
 size = Vector3(1, 2, 1)
 material = SubResource("StandardMaterial3D_t5t7e")
@@ -84,11 +92,6 @@ Enemy = ExtResource("5_jmwa5")
 
 [node name="Wave" type="Node" parent="Spawner/Waves"]
 script = ExtResource("8_34m2r")
-seconds_between_spawns = 1.0
-
-[node name="Wave2" type="Node" parent="Spawner/Waves"]
-script = ExtResource("8_34m2r")
-num_enemies = 20
 seconds_between_spawns = 1.0
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
