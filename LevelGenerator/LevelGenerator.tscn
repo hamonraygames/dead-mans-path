@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4kdmnn4nlwk2"]
+
+[ext_resource type="Script" path="res://LevelGenerator/LevelGenerator.gd" id="1_jv8i1"]
+[ext_resource type="PackedScene" uid="uid://5c8bewy63312" path="res://LevelGenerator/ground.tscn" id="2_udhiu"]
+[ext_resource type="PackedScene" uid="uid://42rcipertjbi" path="res://LevelGenerator/obstacle.tscn" id="3_xuhwb"]
+
+[node name="Map" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23607, 0)
+script = ExtResource("1_jv8i1")
+GroundScene = ExtResource("2_udhiu")
+ObstacleScene = ExtResource("3_xuhwb")
