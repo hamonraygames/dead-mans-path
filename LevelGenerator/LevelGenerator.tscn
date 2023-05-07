@@ -9,3 +9,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23607, 0)
 script = ExtResource("1_jv8i1")
 GroundScene = ExtResource("2_udhiu")
 ObstacleScene = ExtResource("3_xuhwb")
+map_width = 15
+map_depth = 9
+obstacle_density = 1.0
