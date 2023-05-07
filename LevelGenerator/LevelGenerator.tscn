@@ -11,4 +11,6 @@ GroundScene = ExtResource("2_udhiu")
 ObstacleScene = ExtResource("3_xuhwb")
 map_width = 15
 map_depth = 9
-obstacle_density = 1.0
+obstacle_density = 0.6
+foreground_color = Color(0.721569, 0.117647, 0.447059, 1)
+background_color = Color(0, 0, 0.639216, 1)

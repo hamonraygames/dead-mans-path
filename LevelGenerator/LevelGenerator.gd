@@ -40,6 +40,22 @@ var rng_seed: int = 12345:
 	get:
 		return rng_seed
 	
+@export
+var foreground_color: Color: 
+	set(value):
+		foreground_color = value
+		generate_map()
+	get:
+		return foreground_color
+		
+@export
+var background_color: Color: 
+	set(value):
+		background_color = value
+		generate_map()
+	get:
+		return background_color
+		
 @export_range(1, 5)
 var obstacle_max_height = 5: 
 	set(value):
@@ -127,13 +143,27 @@ func create_obstacles_at(x,z):
 	var temp
 	var obstacle_position = Vector3(x * 2 - map_width + 1, 0, z * 2 - map_depth + 1)
 	var obstacle: CSGBox3D = ObstacleScene.instantiate()
+	
 	temp = get_obstacle_height()
 	obstacle.height = temp
-	obstacle.transform.origin = obstacle_position + \
-	Vector3(0, temp / 2 , 0)
+	obstacle.transform.origin = obstacle_position + Vector3(0, temp / 2 , 0)
 	
-	print()
+	var new_material := StandardMaterial3D.new()
+	new_material.albedo_color = get_color_at_depth(z)
+	obstacle.material = new_material
+	
 	add_child(obstacle)
 
 func get_obstacle_height():
 	return randf_range(obstacle_min_height, obstacle_max_height)
+
+func get_color_at_depth(z):
+	return background_color.lerp(foreground_color, float(z)/map_depth)
+	
+	
+	
+	
+	
+	
+	
+	
