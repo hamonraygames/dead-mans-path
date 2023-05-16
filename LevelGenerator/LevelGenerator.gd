@@ -76,15 +76,15 @@ var background_color: Color:
 	get:
 		return background_color
 		
-@export_range(1, 5)
-var obstacle_max_height = 5: 
+@export_range(1, 5, 0.05)
+var obstacle_max_height: float = 5.0: 
 	set(value):
 		obstacle_max_height = max(value, obstacle_min_height)
 	get:
 		return obstacle_max_height	
 	
-@export_range(1, 5)
-var obstacle_min_height = 1: 
+@export_range(1, 5, 0.05)
+var obstacle_min_height: float = 1.0: 
 	set(value):
 		obstacle_min_height = min(value, obstacle_max_height)
 	get:   
@@ -108,7 +108,8 @@ var map_coords_array : Array = []
 var obstacle_map : Array = []
 var map_center := Coord.new(map_width/2, map_depth/2)
 
-var level: Node3D
+var level: NavigationRegion3D
+var navigation_mesh_instance: NavigationMesh
 
 func _ready():
 	update_map_center()
@@ -148,13 +149,18 @@ func generate_map():
 	
 func clear_map():
 	for node in get_children():
-		node.queue_free()	
+		node.free()	
 
 func add_level():
-	level = Node3D.new()
-	level.name = "Level"
+	level = NavigationRegion3D.new()
+	level.name = "NavigationRegion3D"
 	add_child(level)
 	level.owner = self
+	
+	navigation_mesh_instance = NavigationMesh.new()
+	
+	level.navigation_mesh = navigation_mesh_instance
+	level.bake_navigation_mesh(false)
 
 func add_ground():
 	print("Generating the ground...")

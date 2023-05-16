@@ -1,20 +1,336 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4kdmnn4nlwk2"]
+[gd_scene load_steps=34 format=3 uid="uid://b4kdmnn4nlwk2"]
 
 [ext_resource type="Script" path="res://LevelGenerator/LevelGenerator.gd" id="1_jv8i1"]
 [ext_resource type="PackedScene" uid="uid://5c8bewy63312" path="res://LevelGenerator/ground.tscn" id="2_udhiu"]
 [ext_resource type="PackedScene" uid="uid://42rcipertjbi" path="res://LevelGenerator/obstacle.tscn" id="3_xuhwb"]
+[ext_resource type="Texture2D" uid="uid://b7jnqm7k0d7qj" path="res://Textures/ground-grid.png" id="4_8a2xj"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_y7825"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s18fm"]
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+albedo_texture = ExtResource("4_8a2xj")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0yo0"]
+albedo_color = Color(0.354724, 0, 0.0819964, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hrx2r"]
+albedo_color = Color(0.354724, 0, 0.0819964, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xed8f"]
+albedo_color = Color(0.212834, 0, 0.0491979, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65ikv"]
+albedo_color = Color(0.425668, 0, 0.0983957, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lqv7j"]
+albedo_color = Color(0.283779, 0, 0.0655972, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtyx2"]
+albedo_color = Color(0.496613, 0, 0.114795, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bi61r"]
+albedo_color = Color(0.354724, 0, 0.0819964, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfimf"]
+albedo_color = Color(0.283779, 0, 0.0655972, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v37mn"]
+albedo_color = Color(0.709447, 0, 0.163993, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10h6j"]
+albedo_color = Color(0.709447, 0, 0.163993, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cokuw"]
+albedo_color = Color(0.709447, 0, 0.163993, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uixt3"]
+albedo_color = Color(0.141889, 0, 0.0327986, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dw8en"]
+albedo_color = Color(0.283779, 0, 0.0655972, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mdmk8"]
+albedo_color = Color(0.496613, 0, 0.114795, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hugt"]
+albedo_color = Color(0.638503, 0, 0.147594, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_utmsr"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_htjcr"]
+albedo_color = Color(0.212834, 0, 0.0491979, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p635f"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnbx4"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1o0p"]
+albedo_color = Color(0.638503, 0, 0.147594, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6w04"]
+albedo_color = Color(0.141889, 0, 0.0327986, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbpkw"]
+albedo_color = Color(0.709447, 0, 0.163993, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0v010"]
+albedo_color = Color(0.283779, 0, 0.0655972, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oshaf"]
+albedo_color = Color(0.567558, 0, 0.131194, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38k1g"]
+albedo_color = Color(0.709447, 0, 0.163993, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ongy"]
+albedo_color = Color(0.496613, 0, 0.114795, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ddia"]
+albedo_color = Color(0.283779, 0, 0.0655972, 1)
 
 [node name="Map" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23607, 0)
 script = ExtResource("1_jv8i1")
 GroundScene = ExtResource("2_udhiu")
 ObstacleScene = ExtResource("3_xuhwb")
-map_depth = 9
+map_width = 13
+rng_seed = 12347
 generate_level = null
 save_level = null
-foreground_color = Color(0.784314, 0, 0.0862745, 1)
-background_color = Color(0, 0.54902, 0.352941, 1)
-obstacle_max_height = 3
-obstacle_min_height = 2
+foreground_color = Color(0.780392, 0, 0.180392, 1)
+obstacle_max_height = 2.55
+obstacle_min_height = 1.6
 
-[node name="Level" type="Node3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_y7825")
+
+[node name="Ground" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("2_udhiu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_s18fm")
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(26, 2, 22)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4, 0.885274, 0)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.77055, 1)
+material = SubResource("StandardMaterial3D_g0yo0")
+
+[node name="@CSGBox3D4@54993" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 1.0498, 0)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.0996, 1)
+material = SubResource("StandardMaterial3D_hrx2r")
+
+[node name="@CSGBox3D4@54994" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 12, 0.840282, -4)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.68056, 1)
+material = SubResource("StandardMaterial3D_xed8f")
+
+[node name="@CSGBox3D4@54995" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 1.03389, 2)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.06777, 1)
+material = SubResource("StandardMaterial3D_65ikv")
+
+[node name="@CSGBox3D4@54996" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 12, 1.07069, -2)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.14137, 1)
+material = SubResource("StandardMaterial3D_lqv7j")
+
+[node name="@CSGBox3D4@54997" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 8, 0.820177, 4)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.64035, 1)
+material = SubResource("StandardMaterial3D_mtyx2")
+
+[node name="@CSGBox3D4@54998" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6, 0.94701, 0)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.89402, 1)
+material = SubResource("StandardMaterial3D_bi61r")
+
+[node name="@CSGBox3D4@54999" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6, 0.878207, -2)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.75641, 1)
+material = SubResource("StandardMaterial3D_rfimf")
+
+[node name="@CSGBox3D4@55000" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 1.22466, 10)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.44931, 1)
+material = SubResource("StandardMaterial3D_v37mn")
+
+[node name="@CSGBox3D4@55001" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 12, 1.23523, 10)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.47045, 1)
+material = SubResource("StandardMaterial3D_10h6j")
+
+[node name="@CSGBox3D4@55002" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4, 1.21492, 10)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.42983, 1)
+material = SubResource("StandardMaterial3D_cokuw")
+
+[node name="@CSGBox3D4@55003" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 8, 1.02794, -6)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.05588, 1)
+material = SubResource("StandardMaterial3D_uixt3")
+
+[node name="@CSGBox3D4@55004" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -12, 0.895882, -2)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.79176, 1)
+material = SubResource("StandardMaterial3D_dw8en")
+
+[node name="@CSGBox3D4@55005" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0.988113, 4)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.97623, 1)
+material = SubResource("StandardMaterial3D_mdmk8")
+
+[node name="@CSGBox3D4@55006" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4, 1.15309, 8)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.30618, 1)
+material = SubResource("StandardMaterial3D_7hugt")
+
+[node name="@CSGBox3D4@55007" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 8, 1.05158, -10)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.10315, 1)
+material = SubResource("StandardMaterial3D_utmsr")
+
+[node name="@CSGBox3D4@55008" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 8, 1.19328, -4)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.38656, 1)
+material = SubResource("StandardMaterial3D_htjcr")
+
+[node name="@CSGBox3D4@55009" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6, 1.01245, -10)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.02489, 1)
+material = SubResource("StandardMaterial3D_p635f")
+
+[node name="@CSGBox3D4@55010" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 1.25232, -10)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.50464, 1)
+material = SubResource("StandardMaterial3D_nnbx4")
+
+[node name="@CSGBox3D4@55011" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 1.12525, 8)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.2505, 1)
+material = SubResource("StandardMaterial3D_v1o0p")
+
+[node name="@CSGBox3D4@55012" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6, 0.845434, -6)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.69087, 1)
+material = SubResource("StandardMaterial3D_k6w04")
+
+[node name="@CSGBox3D4@55013" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -12, 0.820925, 10)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.64185, 1)
+material = SubResource("StandardMaterial3D_wbpkw")
+
+[node name="@CSGBox3D4@55014" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 1.23057, -2)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.46113, 1)
+material = SubResource("StandardMaterial3D_0v010")
+
+[node name="@CSGBox3D4@55015" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8, 1.04099, 6)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 2.08197, 1)
+material = SubResource("StandardMaterial3D_oshaf")
+
+[node name="@CSGBox3D4@55016" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0.937796, 10)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.87559, 1)
+material = SubResource("StandardMaterial3D_38k1g")
+
+[node name="@CSGBox3D4@55017" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6, 0.980594, 4)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.96119, 1)
+material = SubResource("StandardMaterial3D_1ongy")
+
+[node name="@CSGBox3D4@55018" type="CSGBox3D" parent="NavigationRegion3D" instance=ExtResource("3_xuhwb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.807779, -2)
+use_collision = true
+collision_layer = 11
+collision_mask = 3
+size = Vector3(1, 1.61556, 1)
+material = SubResource("StandardMaterial3D_1ddia")
