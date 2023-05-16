@@ -13,7 +13,6 @@ var map_width = 11 :
 	set(value):
 		map_width = make_odd(value, map_width)
 		update_map_center()
-		generate_map()
 	get:
 		return map_width
 
@@ -22,7 +21,6 @@ var map_depth = 11 :
 	set(value):
 		map_depth = make_odd(value, map_depth)
 		update_map_center()
-		generate_map()
 	get:
 		return map_depth
 
@@ -30,7 +28,6 @@ var map_depth = 11 :
 var obstacle_density = 0.2 : 
 	set(value):
 		obstacle_density = value
-		generate_map()
 	get:
 		return obstacle_density
 
@@ -38,15 +35,37 @@ var obstacle_density = 0.2 :
 var rng_seed: int = 12345: 
 	set(value):
 		rng_seed = value
-		generate_map()
 	get:
 		return rng_seed
+	
+@export
+var generate_level: bool = false: 
+	set(value):
+		generate_map()
+	get:
+		return generate_level
+	
+@export
+var level_name: String = "New Level"
+	
+@export
+var save_level: bool = false: 
+	set(value):
+		var packed_scene = PackedScene.new()
+		
+		for child in level.get_children():
+			child.owner = level
+		
+		packed_scene.pack(level)
+		var resource_path =  "res://LevelGenerator/Levels/%s.tscn" % level_name
+		ResourceSaver.save(packed_scene, resource_path)
+	get:
+		return generate_level
 	
 @export
 var foreground_color: Color: 
 	set(value):
 		foreground_color = value
-		generate_map()
 	get:
 		return foreground_color
 		
@@ -54,7 +73,6 @@ var foreground_color: Color:
 var background_color: Color: 
 	set(value):
 		background_color = value
-		generate_map()
 	get:
 		return background_color
 		
@@ -62,7 +80,6 @@ var background_color: Color:
 var obstacle_max_height = 5: 
 	set(value):
 		obstacle_max_height = max(value, obstacle_min_height)
-		generate_map()
 	get:
 		return obstacle_max_height	
 	
@@ -70,8 +87,7 @@ var obstacle_max_height = 5:
 var obstacle_min_height = 1: 
 	set(value):
 		obstacle_min_height = min(value, obstacle_max_height)
-		generate_map()
-	get:
+	get:   
 		return obstacle_min_height		
 
 class Coord:
@@ -92,11 +108,11 @@ var map_coords_array : Array = []
 var obstacle_map : Array = []
 var map_center := Coord.new(map_width/2, map_depth/2)
 
+var level: Node3D
 
 func _ready():
 	update_map_center()
-	generate_map()
-
+ 
 func update_map_center():
 	map_center = Coord.new(map_width/2, map_depth/2)
 	
@@ -126,13 +142,20 @@ func generate_map():
 	print("Generating the map...")
 	
 	clear_map()
+	add_level()
 	add_ground()
 	add_obstacles()
 	
 func clear_map():
 	for node in get_children():
 		node.queue_free()	
-		
+
+func add_level():
+	level = Node3D.new()
+	level.name = "Level"
+	add_child(level)
+	level.owner = self
+
 func add_ground():
 	print("Generating the ground...")
 	var ground: CSGBox3D = GroundScene.instantiate()
@@ -140,7 +163,8 @@ func add_ground():
 	ground.width = map_width * 2
 	ground.depth = map_depth * 2
 	
-	add_child(ground)
+	level.add_child(ground)
+	ground.owner = self 
 
 func add_obstacles():
 	fill_map_coords_array()
@@ -211,7 +235,8 @@ func create_obstacles_at(x,z):
 	new_material.albedo_color = get_color_at_depth(z)
 	obstacle.material = new_material
 	
-	add_child(obstacle)
+	level.add_child(obstacle)
+	obstacle.owner = self 
 
 func get_obstacle_height():
 	return randf_range(obstacle_min_height, obstacle_max_height)

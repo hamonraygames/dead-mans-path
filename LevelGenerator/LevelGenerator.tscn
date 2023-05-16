@@ -9,9 +9,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23607, 0)
 script = ExtResource("1_jv8i1")
 GroundScene = ExtResource("2_udhiu")
 ObstacleScene = ExtResource("3_xuhwb")
-map_width = 9
 map_depth = 9
-obstacle_density = 0.4
-rng_seed = 12342
-foreground_color = Color(0.721569, 0.117647, 0.447059, 1)
-background_color = Color(0, 0, 0.639216, 1)
+generate_level = null
+save_level = null
+foreground_color = Color(0.784314, 0, 0.0862745, 1)
+background_color = Color(0, 0.54902, 0.352941, 1)
+obstacle_max_height = 3
+obstacle_min_height = 2
+
+[node name="Level" type="Node3D" parent="."]
