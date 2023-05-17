@@ -9,6 +9,14 @@ var player = $Player
 @onready
 var players_hand = $Player/Body/Hand
 
+@onready
+var navmap: NavigationMap = $NavigationRegion3D
+
+func _ready():
+	print(navmap.map_depth)
+	print(navmap.map_width)
+	print(navmap.obstacle_map)
+
 func _physics_process(delta):
 	if is_instance_valid(player):
 		var mouse_position = get_viewport().get_mouse_position()	

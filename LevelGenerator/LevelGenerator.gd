@@ -12,8 +12,6 @@ var ObstacleScene: PackedScene
 var map_width = 11 : 
 	set(value):
 		map_width = make_odd(value, map_width)
-		update_map_center()
-		generate_map()
 	get:
 		return map_width
 
@@ -21,8 +19,6 @@ var map_width = 11 :
 var map_depth = 11 : 
 	set(value):
 		map_depth = make_odd(value, map_depth)
-		update_map_center()
-		generate_map()
 	get:
 		return map_depth
 
@@ -30,7 +26,6 @@ var map_depth = 11 :
 var obstacle_density = 0.2 : 
 	set(value):
 		obstacle_density = value
-		generate_map()
 	get:
 		return obstacle_density
 
@@ -38,15 +33,37 @@ var obstacle_density = 0.2 :
 var rng_seed: int = 12345: 
 	set(value):
 		rng_seed = value
-		generate_map()
 	get:
 		return rng_seed
+	
+@export
+var generate_level: bool = false: 
+	set(value):
+		generate_map()
+	get:
+		return generate_level
+	
+@export
+var level_name: String = "New Level"
+	
+@export
+var save_level: bool = false: 
+	set(value):
+		var packed_scene = PackedScene.new()
+		
+		for child in level.get_children():
+			child.owner = level
+		
+		packed_scene.pack(level)
+		var resource_path =  "res://LevelGenerator/Levels/%s.tscn" % level_name
+		ResourceSaver.save(packed_scene, resource_path)
+	get:
+		return generate_level
 	
 @export
 var foreground_color: Color: 
 	set(value):
 		foreground_color = value
-		generate_map()
 	get:
 		return foreground_color
 		
@@ -54,52 +71,29 @@ var foreground_color: Color:
 var background_color: Color: 
 	set(value):
 		background_color = value
-		generate_map()
 	get:
 		return background_color
 		
-@export_range(1, 5)
-var obstacle_max_height = 5: 
+@export_range(1, 5, 0.25)
+var obstacle_max_height: float = 5.0: 
 	set(value):
 		obstacle_max_height = max(value, obstacle_min_height)
-		generate_map()
 	get:
 		return obstacle_max_height	
 	
-@export_range(1, 5)
-var obstacle_min_height = 1: 
+@export_range(1, 5, 0.25)
+var obstacle_min_height: float = 1.0: 
 	set(value):
 		obstacle_min_height = min(value, obstacle_max_height)
-		generate_map()
-	get:
+	get:   
 		return obstacle_min_height		
 
-class Coord:
-	var x: int
-	var z: int
-	
-	func _init(x, z):
-		self.x = x
-		self.z = z
-	
-	func _to_string():
-		return "(" + str(x) + "," + str(z) + ")"
-	
-	func check_for_equals(coord):
-		return self.x == coord.x and self.z == coord.z
-	
-var map_coords_array : Array = []
-var obstacle_map : Array = []
-var map_center := Coord.new(map_width/2, map_depth/2)
 
+var level: NavigationMap
 
 func _ready():
-	update_map_center()
-	generate_map()
-
-func update_map_center():
-	map_center = Coord.new(map_width/2, map_depth/2)
-	
+	level.update_map_center()
+ 
 func make_odd(new_int, old_int):
 	if new_int % 2 == 0:
 		if new_int > old_int:
@@ -109,30 +103,39 @@ func make_odd(new_int, old_int):
 	else:
 		return new_int
 	
-func fill_map_coords_array():
-	map_coords_array = []
-	for x in range(map_width):
-		for z in range(map_depth):
-			map_coords_array.append(Coord.new(x, z))	
-
 func fill_obstacle_map():
-	obstacle_map = []
+	level.obstacle_map = []
 	for x in range(map_width):
-		obstacle_map.append([])
+		level.obstacle_map.append([])
 		for z in range(map_depth):
-			obstacle_map[x].append(false)
+			level.obstacle_map[x].append(false)
 
 func generate_map():
 	print("Generating the map...")
 	
 	clear_map()
+	add_level()
+	level.update_map_center()
 	add_ground()
 	add_obstacles()
 	
 func clear_map():
 	for node in get_children():
-		node.queue_free()	
+		node.free()	
+
+func add_level():
+	level = NavigationMap.new()
+	level.name = "NavigationRegion3D"
+	add_child(level)
+	level.owner = self
+	
+	level.map_depth = map_depth
+	level.map_width = map_width
 		
+	level.navigation_mesh = NavigationMesh.new()
+	
+	level.bake_navigation_mesh(false)
+
 func add_ground():
 	print("Generating the ground...")
 	var ground: CSGBox3D = GroundScene.instantiate()
@@ -140,28 +143,29 @@ func add_ground():
 	ground.width = map_width * 2
 	ground.depth = map_depth * 2
 	
-	add_child(ground)
+	level.add_child(ground)
+	ground.owner = self 
 
 func add_obstacles():
-	fill_map_coords_array()
+	level.fill_map_coords_array()
 	fill_obstacle_map()
 	
 	seed(rng_seed)
-	map_coords_array.shuffle()
+	level.map_coords_array.shuffle()
 	
-	var number_of_obstacles: int = map_coords_array.size() * obstacle_density
+	var number_of_obstacles: int = level.map_coords_array.size() * obstacle_density
 	var current_obstacle_count = 0
 	if number_of_obstacles > 0:
-		for coord in map_coords_array.slice(0, number_of_obstacles):
-			if !map_center.check_for_equals(coord):
+		for coord in level.map_coords_array.slice(0, number_of_obstacles):
+			if !level.map_center.check_for_equals(coord):
 				
 				current_obstacle_count += 1
-				obstacle_map[coord.x][coord.z] = true
+				level.obstacle_map[coord.x][coord.z] = true
 				if map_is_fully_accessable(current_obstacle_count):
 					create_obstacles_at(coord.x, coord.z)
 				else:
 					current_obstacle_count -= 1
-					obstacle_map[coord.x][coord.z] = false
+					level.obstacle_map[coord.x][coord.z] = false
 
 func map_is_fully_accessable(current_obstacle_count):
 	var we_already_checked_here = []
@@ -170,19 +174,19 @@ func map_is_fully_accessable(current_obstacle_count):
 		for z in range(map_depth):
 			we_already_checked_here[x].append(false)
 	
-	var coords_to_check = [map_center]
-	we_already_checked_here[map_center.x][map_center.z] = true
+	var coords_to_check = [level.map_center]
+	we_already_checked_here[level.map_center.x][level.map_center.z] = true
 	var accessable_tile_count = 1
 	
 	while coords_to_check:
-		var corrent_tile: Coord = coords_to_check.pop_front()
+		var corrent_tile: NavigationMap.Coord = coords_to_check.pop_front()
 		for x in [-1, 0, 1]:
 			for z in [-1, 0, 1]:
 				if x == 0 or z == 0:
-					var neighbor = Coord.new(corrent_tile.x + x, corrent_tile.z + z)
+					var neighbor = NavigationMap.Coord.new(corrent_tile.x + x, corrent_tile.z + z)
 					if on_the_map(neighbor):
 						if not we_already_checked_here[neighbor.x][neighbor.z]:
-							if not obstacle_map[neighbor.x][neighbor.z]:
+							if not level.obstacle_map[neighbor.x][neighbor.z]:
 								we_already_checked_here[neighbor.x][neighbor.z] = true
 								coords_to_check.append(neighbor)
 								accessable_tile_count += 1
@@ -211,7 +215,8 @@ func create_obstacles_at(x,z):
 	new_material.albedo_color = get_color_at_depth(z)
 	obstacle.material = new_material
 	
-	add_child(obstacle)
+	level.add_child(obstacle)
+	obstacle.owner = self 
 
 func get_obstacle_height():
 	return randf_range(obstacle_min_height, obstacle_max_height)

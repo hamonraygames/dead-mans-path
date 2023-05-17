@@ -12,8 +12,9 @@ uv1_triplanar = true
 uv1_world_triplanar = true
 
 [node name="CSGBox3D4" type="CSGBox3D"]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 use_collision = true
 collision_layer = 11
 collision_mask = 3
+size = Vector3(1, 2, 1)
 material = SubResource("StandardMaterial3D_t5t7e")
