@@ -1,14 +1,14 @@
 [gd_scene load_steps=7 format=3 uid="uid://b108qv670ugt4"]
 
-[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_0rmwc"]
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_h2rmf"]
 [ext_resource type="PackedScene" uid="uid://bx5k706bx204p" path="res://Scenes/player.tscn" id="2_0nq60"]
-[ext_resource type="PackedScene" uid="uid://v521snait1uj" path="res://LevelGenerator/Levels/New Level.tscn" id="3_tewnj"]
+[ext_resource type="PackedScene" uid="uid://dkbffwifnmmfm" path="res://LevelGenerator/Levels/New Level.tscn" id="3_tewnj"]
 [ext_resource type="PackedScene" uid="uid://nrdrnenw3umb" path="res://Scenes/enemy.tscn" id="5_jmwa5"]
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="6_6fxdk"]
 [ext_resource type="Script" path="res://Scripts/Wave.gd" id="8_34m2r"]
 
-[node name="Level" type="Node3D"]
-script = ExtResource("1_0rmwc")
+[node name="Game" type="Node3D"]
+script = ExtResource("1_h2rmf")
 
 [node name="Player" parent="." instance=ExtResource("2_0nq60")]
 
@@ -18,8 +18,6 @@ shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 10)
-
-[node name="NavigationRegion3D51819" parent="." instance=ExtResource("3_tewnj")]
 
 [node name="Spawner" type="Node3D" parent="."]
 script = ExtResource("6_6fxdk")
@@ -32,5 +30,8 @@ Enemy = ExtResource("5_jmwa5")
 [node name="Wave" type="Node" parent="Spawner/Waves"]
 script = ExtResource("8_34m2r")
 seconds_between_spawns = 1.0
+
+[node name="NavigationRegion3D" parent="." instance=ExtResource("3_tewnj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.286842, 0)
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
