@@ -96,6 +96,7 @@ var level: NavigationMap
 
 func _ready():
 	level.update_map_center()
+	
  
 func increment_string(string):
 	var regex = RegEx.new()

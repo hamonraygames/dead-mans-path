@@ -1,7 +1,10 @@
 extends CharacterBody3D
 
 @onready var gun_controller = $GunController
-var SPEED = 5
+@export var speed = 0
+@export var max_speed = 20
+@export var gravity = 5.0
+@export var accel = 1
 
 func _physics_process(delta):
 	move()
@@ -18,8 +21,14 @@ func move():
 		direction.z -= 1 
 	if Input.is_action_pressed("ui_down"):
 		direction.z += 1 
+	
+	direction = Vector3(direction.x, - gravity, direction.z)
+	
+	if direction:
+		velocity = velocity.move_toward(direction.normalized() * max_speed, accel)
+	else:
+		velocity = velocity.move_toward(Vector3(), accel)
 
-	velocity = direction.normalized() * SPEED	
 	move_and_slide()
 
 func shoot():
@@ -27,4 +36,9 @@ func shoot():
 		gun_controller.gun_shoot()
 
 func _on_stats_you_died_signal():
+	queue_free()
+
+
+func _on_void_body_entered(body):
+	print("hmmmmmmmmmm")
 	queue_free()

@@ -3,6 +3,7 @@ extends Node3D
 
 @export var Enemy: PackedScene
 @onready var timer = $Timer
+@onready var navmap = $"../NavigationRegion3D"
 
 var enemies_remaining_to_spawn: int
 var enemies_killed_this_wave: int = 0
@@ -36,6 +37,10 @@ func _on_Enemy_Stats_you_died_signal():
 func _on_timer_timeout():
 	if enemies_remaining_to_spawn != 0:
 		var enemy = Enemy.instantiate()
+		
+		var location: Vector3 = navmap.get_random_empty_vector3()
+		enemy.translate(Vector3(location.x, 0, location.z))
+		
 		connect_to_enemy_signals(enemy)
 		
 		var scene_root = get_parent()
