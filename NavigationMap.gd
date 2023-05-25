@@ -67,7 +67,7 @@ func get_random_empty_vector3():
 	
 func coord_to_vector3(coord: Coord):
 	var x = (CELL_SIZE * coord.x) - ((map_width - 1) * (CELL_SIZE/2))
-	var z = (CELL_SIZE * coord.z) - ((map_width - 1) * (CELL_SIZE/2))
+	var z = (CELL_SIZE * coord.z) - ((map_depth - 1) * (CELL_SIZE/2))
 	return Vector3(x, 0, z)
 
 

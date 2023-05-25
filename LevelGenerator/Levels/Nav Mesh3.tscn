@@ -1,29 +1,77 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4kdmnn4nlwk2"]
+[gd_scene load_steps=14 format=3 uid="uid://4d2kkmtpj8t5"]
 
-[ext_resource type="Script" path="res://LevelGenerator/LevelGenerator.gd" id="1_jv8i1"]
-[ext_resource type="PackedScene" uid="uid://5c8bewy63312" path="res://LevelGenerator/ground.tscn" id="2_udhiu"]
-[ext_resource type="PackedScene" uid="uid://42rcipertjbi" path="res://LevelGenerator/obstacle.tscn" id="3_xuhwb"]
-[ext_resource type="Script" path="res://NavigationMap.gd" id="4_f85ar"]
+[ext_resource type="Script" path="res://NavigationMap.gd" id="1_q1vje"]
+[ext_resource type="PackedScene" uid="uid://5c8bewy63312" path="res://LevelGenerator/ground.tscn" id="2_yc5ho"]
+[ext_resource type="Texture2D" uid="uid://b7jnqm7k0d7qj" path="res://Textures/ground-grid.png" id="3_dlnfv"]
+[ext_resource type="PackedScene" uid="uid://42rcipertjbi" path="res://LevelGenerator/obstacle.tscn" id="4_mu1w8"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_jl2a5"]
 vertices = PackedVector3Array(-10.5, 0.5, -1.75, -7.5, 0.5, -1.75, -7.25, 0.5, -3.5, -10.5, 0.5, -6.5, -4.5, 0.5, -3.5, 0.5, 0.5, -6.5, -10.5, 0.5, -6.5, -7.25, 0.5, -3.5, -4.25, 0.5, -2, 1, 0.5, -2.25, 0.5, 0.5, -2.5, -4.5, 0.5, -3.5, -4.25, 0.5, -2, 0.5, 0.5, -2.5, 0.5, 0.5, -6.5, 1.5, 2, -6.5, 1.5, 2, -3.5, 2.5, 2, -3.5, 2.5, 2, -6.5, 3.75, 0.5, -2.75, 2.75, 0.5, -2.25, 3, 0.5, 0.5, 5.5, 0.5, 0.5, 3.75, 0.5, -6.5, 3.75, 0.5, -2.75, 5.5, 0.5, 0.5, 10.5, 0.5, 2, 10.5, 0.5, -6.5, 5.5, 0.5, 0.5, 5.75, 0.5, 2.25, 10.5, 0.5, 2, -6.5, 2, -2.5, -6.5, 2, -1.5, -5.5, 2, -1.5, -5.5, 2, -2.5, 2.5, 0.5, 0.75, 3, 0.5, 0.5, 2.75, 0.5, -2.25, 1, 0.5, -2.25, 1, 0.5, -2.25, -4.25, 0.5, -2, -4.25, 0.5, -0.75, -0.75, 0.5, 4.5, 2.5, 0.5, 3.25, 2.5, 0.5, 0.75, -4.25, 0.5, -0.75, -5, 0.5, -0.25, -4.75, 0.5, 4.5, -0.75, 0.5, 4.5, 2.5, 0.5, 0.75, 1, 0.5, -2.25, -7.25, 0.5, -0.25, -7.5, 0.5, -1.75, -10.5, 0.5, -1.75, -5.5, 0.5, 4.75, -4.75, 0.5, 4.5, -5, 0.5, -0.25, -7.25, 0.5, -0.25, -10.5, 0.5, 6.5, -5.5, 0.5, 6.5, -5.5, 0.5, 4.75, -7.25, 0.5, -0.25, -10.5, 0.5, -1.75, 3.5, 2, 1.5, 3.5, 2, 2.5, 4.5, 2, 2.5, 4.5, 2, 1.5, 2.5, 0.5, 3.25, -0.75, 0.5, 4.5, -0.25, 0.5, 4.75, 2.75, 0.5, 3.75, 5.25, 0.5, 3.75, 2.75, 0.5, 3.75, 4.75, 0.5, 4.5, 7.5, 0.5, 4.5, 7.5, 0.5, 4.5, 7.75, 0.5, 6.5, 10.5, 0.5, 6.5, 7.5, 0.5, 4.5, 10.5, 0.5, 6.5, 10.5, 0.5, 2, 5.75, 0.5, 2.25, 2.75, 0.5, 3.75, -0.25, 0.5, 4.75, -0.25, 0.5, 6.5, 4.5, 0.5, 6.5, 4.75, 0.5, 4.5, 7.5, 0.5, 4.5, 5.75, 0.5, 2.25, 5.25, 0.5, 3.75, -4.5, 2, 5.5, -4.5, 2, 6.5, -1.5, 2, 6.5, -1.5, 2, 5.5, 5.5, 2, 5.5, 5.5, 2, 6.5, 6.5, 2, 6.5, 6.5, 2, 5.5)
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(10, 9, 8), PackedInt32Array(12, 11, 13), PackedInt32Array(13, 11, 14), PackedInt32Array(18, 17, 15), PackedInt32Array(15, 17, 16), PackedInt32Array(20, 19, 21), PackedInt32Array(21, 19, 22), PackedInt32Array(24, 23, 25), PackedInt32Array(25, 23, 27), PackedInt32Array(25, 27, 26), PackedInt32Array(30, 29, 28), PackedInt32Array(34, 33, 31), PackedInt32Array(31, 33, 32), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 38), PackedInt32Array(41, 40, 39), PackedInt32Array(44, 43, 42), PackedInt32Array(46, 45, 47), PackedInt32Array(47, 45, 48), PackedInt32Array(48, 45, 49), PackedInt32Array(49, 45, 50), PackedInt32Array(53, 52, 51), PackedInt32Array(55, 54, 56), PackedInt32Array(56, 54, 57), PackedInt32Array(59, 58, 60), PackedInt32Array(60, 58, 61), PackedInt32Array(61, 58, 62), PackedInt32Array(66, 65, 63), PackedInt32Array(63, 65, 64), PackedInt32Array(70, 69, 67), PackedInt32Array(67, 69, 68), PackedInt32Array(72, 71, 73), PackedInt32Array(73, 71, 74), PackedInt32Array(77, 76, 75), PackedInt32Array(81, 80, 78), PackedInt32Array(78, 80, 79), PackedInt32Array(86, 85, 82), PackedInt32Array(82, 85, 83), PackedInt32Array(83, 85, 84), PackedInt32Array(89, 88, 87), PackedInt32Array(93, 92, 90), PackedInt32Array(90, 92, 91), PackedInt32Array(97, 96, 94), PackedInt32Array(94, 96, 95)]
 
-[node name="LevelGenerator" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23607, 0)
-script = ExtResource("1_jv8i1")
-GroundScene = ExtResource("2_udhiu")
-ObstacleScene = ExtResource("3_xuhwb")
-map_depth = 7
-obstacle_density = 0.1
-rng_seed = 12439
-level_name = "Nav Mesh4"
-foreground_color = Color(0.780392, 0, 0.180392, 1)
-obstacle_max_height = 1.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s18fm"]
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+albedo_texture = ExtResource("3_dlnfv")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl430"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skrdw"]
+albedo_color = Color(0.445938, 0, 0.103081, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dvee"]
+albedo_color = Color(0.668907, 0, 0.154622, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbl53"]
+albedo_color = Color(0.222969, 0, 0.0515406, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdcmb"]
+albedo_color = Color(0.111485, 0, 0.0257703, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awamr"]
+albedo_color = Color(0.668907, 0, 0.154622, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oocdh"]
+albedo_color = Color(0.668907, 0, 0.154622, 1)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D"]
 navigation_mesh = SubResource("NavigationMesh_jl2a5")
-script = ExtResource("4_f85ar")
+script = ExtResource("1_q1vje")
 map_width = 11
 map_depth = 7
 obstacle_map = [[false, false, false, false, false, false, false], [false, false, false, false, false, false, false], [false, false, true, false, false, false, false], [false, false, false, false, false, false, true], [false, false, false, false, false, false, true], [false, false, false, false, false, false, false], [true, true, false, false, false, false, false], [false, false, false, false, true, false, false], [false, false, false, false, false, false, true], [false, false, false, false, false, false, false], [false, false, false, false, false, false, false]]
+
+[node name="Ground" parent="." instance=ExtResource("2_yc5ho")]
+material_override = SubResource("StandardMaterial3D_s18fm")
+size = Vector3(22, 2, 14)
+
+[node name="CSGBox3D4" parent="." instance=ExtResource("4_mu1w8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0.5, -6)
+material = SubResource("StandardMaterial3D_wl430")
+
+[node name="@CSGBox3D4@24242" parent="." instance=ExtResource("4_mu1w8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 4, 0.5, 2)
+material = SubResource("StandardMaterial3D_skrdw")
+
+[node name="@CSGBox3D4@24243" parent="." instance=ExtResource("4_mu1w8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6, 0.5, 6)
+material = SubResource("StandardMaterial3D_3dvee")
+
+[node name="@CSGBox3D4@24244" parent="." instance=ExtResource("4_mu1w8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6, 0.5, -2)
+material = SubResource("StandardMaterial3D_bbl53")
+
+[node name="@CSGBox3D4@24245" parent="." instance=ExtResource("4_mu1w8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0.5, -4)
+material = SubResource("StandardMaterial3D_jdcmb")
+
+[node name="@CSGBox3D4@24246" parent="." instance=ExtResource("4_mu1w8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2, 0.5, 6)
+material = SubResource("StandardMaterial3D_awamr")
+
+[node name="@CSGBox3D4@24247" parent="." instance=ExtResource("4_mu1w8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4, 0.5, 6)
+material = SubResource("StandardMaterial3D_oocdh")

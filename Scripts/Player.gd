@@ -24,6 +24,8 @@ func move():
 	
 	direction = Vector3(direction.x, - gravity, direction.z)
 	
+	velocity = velocity.move_toward(direction.normalized() * max_speed, accel)
+	
 	if direction:
 		velocity = velocity.move_toward(direction.normalized() * max_speed, accel)
 	else:

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_h2rmf"]
 [ext_resource type="PackedScene" uid="uid://bx5k706bx204p" path="res://Scenes/player.tscn" id="2_0nq60"]
+[ext_resource type="PackedScene" uid="uid://4d2kkmtpj8t5" path="res://LevelGenerator/Levels/Nav Mesh3.tscn" id="2_6frmy"]
 [ext_resource type="PackedScene" uid="uid://nrdrnenw3umb" path="res://Scenes/enemy.tscn" id="5_jmwa5"]
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="6_6fxdk"]
-[ext_resource type="PackedScene" uid="uid://c7tsvpokvhikw" path="res://LevelGenerator/Levels/Nav Mesh2.tscn" id="6_rw717"]
 [ext_resource type="Script" path="res://Scripts/Wave.gd" id="8_34m2r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m5fhj"]
@@ -23,6 +23,8 @@ fog_sky_affect = 0.368
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_h2rmf")
+
+[node name="NavigationRegion3D" parent="." instance=ExtResource("2_6frmy")]
 
 [node name="Player" parent="." instance=ExtResource("2_0nq60")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51318, 0)
@@ -51,8 +53,6 @@ Enemy = ExtResource("5_jmwa5")
 [node name="Wave" type="Node" parent="Spawner/Waves"]
 script = ExtResource("8_34m2r")
 num_enemies = 7
-
-[node name="NavigationRegion3D" parent="." instance=ExtResource("6_rw717")]
 
 [node name="Void" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
