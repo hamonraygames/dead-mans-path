@@ -57,6 +57,9 @@ var save_level: bool = false:
 		packed_scene.pack(level)
 		var resource_path =  "res://LevelGenerator/Levels/%s.tscn" % level_name
 		ResourceSaver.save(packed_scene, resource_path)
+		
+		level_name = increment_string(level_name)
+		notify_property_list_changed()
 	get:
 		return generate_level
 	
@@ -93,7 +96,16 @@ var level: NavigationMap
 
 func _ready():
 	level.update_map_center()
+	
  
+func increment_string(string):
+	var regex = RegEx.new()
+	regex.compile("\\d+$")
+	var result = regex.search(string)
+	var num = result.get_string() if result else "0"
+	
+	return string.trim_suffix(num) + str(int(num) + 1)
+
 func make_odd(new_int, old_int):
 	if new_int % 2 == 0:
 		if new_int > old_int:
@@ -118,6 +130,9 @@ func generate_map():
 	level.update_map_center()
 	add_ground()
 	add_obstacles()
+	
+	rng_seed += 1
+	notify_property_list_changed()
 	
 func clear_map():
 	for node in get_children():

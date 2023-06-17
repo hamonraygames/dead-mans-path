@@ -15,7 +15,11 @@ var navmap: NavigationMap = $NavigationRegion3D
 func _ready():
 	print(navmap.map_depth)
 	print(navmap.map_width)
-	print(navmap.obstacle_map)
+#	print(navmap.obstacle_map)
+#	print(navmap.map_coords_array)
+#	print(navmap.random_map_coords)
+	
+	
 
 func _physics_process(delta):
 	if is_instance_valid(player):

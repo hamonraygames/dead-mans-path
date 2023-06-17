@@ -15,8 +15,8 @@ func take_hit(damage_amount):
 	
 	if current_hp <= 0:
 		die()
-	else:
-		print("Hit, ", current_hp)
+#	else:
+#		print("Hit, ", current_hp)
 	
 func die():
 	emit_signal("you_died_signal")

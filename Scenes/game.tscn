@@ -1,23 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://b108qv670ugt4"]
+[gd_scene load_steps=10 format=3 uid="uid://b108qv670ugt4"]
 
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_h2rmf"]
 [ext_resource type="PackedScene" uid="uid://bx5k706bx204p" path="res://Scenes/player.tscn" id="2_0nq60"]
-[ext_resource type="PackedScene" uid="uid://dkbffwifnmmfm" path="res://LevelGenerator/Levels/New Level.tscn" id="3_tewnj"]
+[ext_resource type="PackedScene" uid="uid://4d2kkmtpj8t5" path="res://LevelGenerator/Levels/Nav Mesh3.tscn" id="2_6frmy"]
 [ext_resource type="PackedScene" uid="uid://nrdrnenw3umb" path="res://Scenes/enemy.tscn" id="5_jmwa5"]
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="6_6fxdk"]
 [ext_resource type="Script" path="res://Scripts/Wave.gd" id="8_34m2r"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_m5fhj"]
+
+[sub_resource type="Sky" id="Sky_wmgk4"]
+
+[sub_resource type="Environment" id="Environment_a736i"]
+background_mode = 2
+background_energy_multiplier = 2.74
+sky = SubResource("Sky_wmgk4")
+sky_custom_fov = 37.4
+ambient_light_color = Color(0.6, 0.6, 0.6, 1)
+fog_enabled = true
+fog_aerial_perspective = 0.242
+fog_sky_affect = 0.368
+
 [node name="Game" type="Node3D"]
 script = ExtResource("1_h2rmf")
 
+[node name="NavigationRegion3D" parent="." instance=ExtResource("2_6frmy")]
+
 [node name="Player" parent="." instance=ExtResource("2_0nq60")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51318, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, 0.612372, -0.353553, 0, 2, 0)
+transform = Transform3D(-0.707107, -0.612372, 0.353554, 0, 0.5, 0.866025, -0.707107, 0.612372, -0.353554, 0, 7, 0)
+light_energy = 4.394
+light_indirect_energy = 4.556
+light_volumetric_fog_energy = 2.939
+light_angular_distance = 22.73
 shadow_enabled = true
+shadow_opacity = 0.54
+shadow_blur = 3.525
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 10)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 14, 10)
 
 [node name="Spawner" type="Node3D" parent="."]
 script = ExtResource("6_6fxdk")
@@ -29,9 +52,19 @@ Enemy = ExtResource("5_jmwa5")
 
 [node name="Wave" type="Node" parent="Spawner/Waves"]
 script = ExtResource("8_34m2r")
-seconds_between_spawns = 1.0
+num_enemies = 7
 
-[node name="NavigationRegion3D" parent="." instance=ExtResource("3_tewnj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.286842, 0)
+[node name="Void" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Void"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, -23, 0)
+shape = SubResource("BoxShape3D_m5fhj")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a736i")
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Void" to="Player" method="_on_void_body_entered"]
